@@ -17,7 +17,28 @@ export async function getpokemonscontroller(): Promise<Pokemon[]> {
         sp_atk: pokemon.sp_atk,
         sp_def: pokemon.sp_def,
         speed: pokemon.speed,
+        type: pokemon.type[0]
     }));
 
-    return pokemons;
+    const pokerepet = pokemons.filter(
+        (pokemon: any,index: number)=>pokemons.findIndex((other:any) => other.id === pokemon.id) === index
+    );
+
+    return pokerepet;
+}
+
+
+export function CorrectName(name:string): string{
+    if(name.includes("farfetch'd")){
+        return name.replace("farfetch'd","Farfetchd");
+    }else if(name.includes("mr.-mime")){
+        return name.replace("mr.-mime","mr-mime");
+            }else if (name.includes("♂")){
+        return name.replace("♂","-m");
+    }else if (name.includes("♀")){
+        return name.replace("♀","-f");
+    }else{
+        return name;
+    }
+
 }
